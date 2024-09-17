@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class Main {
     //Constantes que definem os comandos
     public static final String ADD_CONTACT    = "AC";
+    public static final String LOOKUP_PHONE   = "GN";
     public static final String REMOVE_CONTACT = "RC";
     public static final String GET_PHONE      = "GP";
     public static final String GET_EMAIL      = "GE";
@@ -23,10 +24,11 @@ public class Main {
     public static final String CONTACT_REMOVED = "contactBook.Contact removed.";
     public static final String CONTACT_UPDATED = "contactBook.Contact updated.";
     public static final String BOOK_EMPTY = "contactBook.Contact book empty.";
-    public static final String QUIT_MSG = "Goodbye!";
+    public static final String UNKNOWN_NUMBER = "Phone number does not exist.";
     public static final String COMMAND_ERROR = "Unknown command.";
     public static final String SAME_NUMBER_TRUE = "There are contacts that share phone numbers.";
     public static final String SAME_NUMBER_FALSE = "All contacts have different phone numbers.";
+    public static final String QUIT_MSG = "Goodbye!";
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
@@ -56,6 +58,9 @@ public class Main {
                 case SAME_NUMBER:
                 	sameNumber(cBook);
                 	break;
+                case LOOKUP_PHONE:
+                    lookupPhone(in, cBook);
+                    break;
                 case LIST_CONTACTS:
                     listAllContacts(cBook);
                     break;
@@ -69,9 +74,7 @@ public class Main {
         System.out.println();
         in.close();
     }
-
-   
-
+    
 	private static String getCommand(Scanner in) {
         String input;
 
@@ -166,4 +169,14 @@ public class Main {
         }
         else System.out.println(BOOK_EMPTY);
     }
+
+
+    private static void lookupPhone(Scanner in, ContactBook cBook) {
+        int phone;
+        phone = in.nextInt(); in.nextLine();
+        if (cBook.hasContact(phone)) {
+            System.out.println(cBook.getName(phone));
+        }
+        else System.out.println(UNKNOWN_NUMBER);
+	}
 }
