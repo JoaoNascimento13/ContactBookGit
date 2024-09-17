@@ -13,6 +13,7 @@ public class Main {
     public static final String SET_PHONE      = "SP";
     public static final String SET_EMAIL      = "SE";
     public static final String LIST_CONTACTS  = "LC";
+    public static final String SAME_NUMBER    = "EP";
     public static final String QUIT           = "Q";
 
     //Constantes que definem as mensagens para o utilizador
@@ -24,6 +25,8 @@ public class Main {
     public static final String BOOK_EMPTY = "contactBook.Contact book empty.";
     public static final String QUIT_MSG = "Goodbye!";
     public static final String COMMAND_ERROR = "Unknown command.";
+    public static final String SAME_NUMBER_TRUE = "There are contacts that share phone numbers.";
+    public static final String SAME_NUMBER_FALSE = "All contacts have different phone numbers.";
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
@@ -50,6 +53,9 @@ public class Main {
                 case SET_EMAIL:
                     setEmail(in,cBook);
                     break;
+                case SAME_NUMBER:
+                	sameNumber(cBook);
+                	break;
                 case LIST_CONTACTS:
                     listAllContacts(cBook);
                     break;
@@ -64,7 +70,9 @@ public class Main {
         in.close();
     }
 
-    private static String getCommand(Scanner in) {
+   
+
+	private static String getCommand(Scanner in) {
         String input;
 
         input = in.nextLine().toUpperCase();
@@ -137,6 +145,17 @@ public class Main {
         else System.out.println(NAME_NOT_EXIST);
     }
 
+    private static void sameNumber(ContactBook cBook) {
+    	
+    	 if (cBook.sameNumber()) {
+    	    System.out.println(SAME_NUMBER_TRUE);
+    	 } 
+    	 else {
+    	        System.out.println(SAME_NUMBER_FALSE);
+    	    }
+		
+	}
+    
     private static void listAllContacts(ContactBook cBook) {
         if (cBook.getNumberOfContacts() != 0) {
             cBook.initializeIterator();

@@ -83,6 +83,18 @@ public class ContactBook {
     public void initializeIterator() {
         currentContact = 0;
     }
+    
+    public boolean sameNumber(){
+    	
+    	for(int x = 0; x < counter-1; x++ ) {
+    		for(int i = x+1 ; i <counter; i++) {
+    			if(contacts[x].getPhone()== contacts[i].getPhone()) {
+    				return true;
+    			}
+    		}
+    	}
+    	return false;
+    }
 
     public boolean hasNext() {
         return (currentContact >= 0 ) && (currentContact < counter);
